@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Latihan</title>
+</head>
+<body>
+    <input type="number" id="inputUmur" placeholder="Masukkan umur...">
+    <button onclick="cekKtp()">Cek Sekarang</button>
+    <h1 id="hasilKtp">Hasil cek KTP</h1>
+
+
+    <script>
+        function cekKtp() {
+            const umur = document.getElementById("inputUmur").value;
+            const hasil = document.getElementById("hasilKtp");
+
+            if (umur >= 17) {
+                hasil.innerText = "Sudah Bisa Membuat KTP";
+            }else {
+                hasil.innerText = "Belum Bisa Membuat KTP";
+            }
+        }
+    </script>
+</body>
+</html>
