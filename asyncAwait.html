@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body class="p-5">
+    <div class="bg-blue-300 border-2 border-gray-400 rounded-lg p-3">
+      <h2 class="text-center font-semibold text-lg">Daftar Pengguna:</h2>
+      <button class="bg-red-500 rounded-lg p-2 text-sm font-semibold hover:bg-green-500 transform-transition duration-300" onclick="ambilDaftarUser()">Load Users</button>
+      <ul class="text-center" id="daftarUser"></ul>
+    </div>
+
+    <script>
+      const ambilDaftarUser = async () => {
+        // 1. Ambil elemen wadah (ul)
+        const wadah = document.getElementById("daftarUser");
+
+        // 2. Fetch data dari API (Ingat, hapus '/1' agar dapat banyak data)
+        const respon = await fetch(
+          "https://jsonplaceholder.typicode.com/users"
+        );
+        const data = await respon.json();
+
+        // 3. Looping data (Array)
+        // 'data' sekarang isinya adalah Array of Objects
+        data.forEach((user) => {
+          const li = document.createElement("li");
+
+          li.innerText = user.name;
+
+          wadah.appendChild(li);
+          // Tulis kodemu di sini:
+          // a. Buat elemen li
+          // b. Isi innerText li dengan user.name
+          // c. Append li ke wadah
+        });
+      };
+    </script>
+  </body>
+</html>

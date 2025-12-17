@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplikasi To-Do List Interaktif</title>
+</head>
+<body>
+
+<div id="app-container">
+    <h1>✅ Daftar Tugas Saya</h1>
+
+    <div id="input-section">
+        <input type="text" id="taskInput" placeholder="Ketik tugas baru lalu tekan Enter atau klik Tambah">
+        <button onclick="addTask()" id="addTaskButton">Tambahkan</button>
+    </div>
+
+    <div id="filter-section" style="margin-top: 20px;">
+        <label for="filterSelect">Filter Tugas:</label>
+        <select id="filterSelect">
+            <option value="all">Semua Tugas</option>
+            <option value="active">Aktif (Belum Selesai)</option>
+            <option value="completed">Selesai</option>
+        </select>
+    </div>
+
+    <ul id="taskList">
+    </ul>
+
+</div>
+
+<script>
+
+    function addTask() {
+        const input = document.getElementById('taskInput').value;
+        const list = document.getElementById('taskList');
+        const li = document.createElement('li');
+
+        if (input !== '') {
+        li.innerText = input;
+        taskList.appendChild(li);
+        document.getElementById('taskInput').value = '';
+        }else{
+            window.alert("tolong isi terlebih dahulu");
+        }
+    }
+
+</script>
+</body>
+</html>

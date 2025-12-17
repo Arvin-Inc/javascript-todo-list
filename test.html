@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="id" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; }
+        /* Custom Checkbox Logic */
+        .task-checkbox:checked + div {
+            background-color: #d4d4d8; /* zinc-300 */
+            border-color: #d4d4d8;
+            color: black;
+        }
+        .task-checkbox:checked ~ span {
+            color: #52525b; /* zinc-600 */
+            text-decoration: line-through;
+        }
+    </style>
+</head>
+<body class="bg-[#050505] min-h-screen flex flex-col items-center justify-center p-6 text-neutral-400 selection:bg-neutral-800 selection:text-white">
+
+    <!-- App Container -->
+    <div class="w-full max-w-[480px] mx-auto flex flex-col gap-8">
+        
+        <!-- Brand / Logo -->
+        <div class="flex items-center gap-3 select-none">
+            <div class="w-8 h-8 bg-neutral-100 rounded-[8px] shadow-lg shadow-white/5 flex items-center justify-center text-black">
+                <iconify-icon icon="lucide:command" width="18" stroke-width="1.5"></iconify-icon>
+            </div>
+            <h1 class="text-neutral-100 font-medium text-lg tracking-tight">TUGAS</h1>
+        </div>
+
+        <!-- Main Interface Card -->
+        <div class="bg-[#0A0A0A] border border-neutral-800 rounded-2xl shadow-2xl shadow-black/80 overflow-hidden ring-1 ring-white/[0.02]">
+            
+            <!-- Input Area -->
+            <div class="relative p-2 border-b border-neutral-800 bg-neutral-900/40 backdrop-blur-sm group focus-within:bg-neutral-900/80 transition-colors duration-300">
+                <div class="flex items-center">
+                    <div class="pl-3 pr-2 text-neutral-600">
+                        <iconify-icon icon="lucide:plus" width="20" stroke-width="1.5"></iconify-icon>
+                    </div>
+                    <input type="text" id="inputTugas" placeholder="Masukkan tugas..." 
+                           class="w-full bg-transparent border-none text-sm text-neutral-200 placeholder-neutral-600 focus:ring-0 py-3.5 h-12 leading-none tracking-wide font-normal">
+                    
+                    <button id="submit" onclick="daftarTugas()" 
+                            class="mr-1.5 bg-neutral-100 hover:bg-white text-black text-xs font-medium px-3 py-1.5 rounded-lg transition-all shadow-lg shadow-white/10 active:scale-95 active:shadow-none flex items-center gap-1.5 h-8">
+                        <span>Tambah</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- List Header -->
+            <div class="flex items-center justify-between px-5 pt-5 pb-2">
+                <h2 class="text-[11px] font-medium text-neutral-500 uppercase tracking-[0.2em]">Daftar Tugas</h2>
+                <div class="flex gap-1">
+                    <div class="w-1 h-1 rounded-full bg-neutral-700"></div>
+                    <div class="w-1 h-1 rounded-full bg-neutral-800"></div>
+                    <div class="w-1 h-1 rounded-full bg-neutral-800"></div>
+                </div>
+            </div>
+
+            <!-- Task List -->
+            <ul id="listTugas" class="flex flex-col pb-3">
+
+            </ul>
+        </div>
+
+    </div>
+
+    <script>
+
+        const daftarTugas = () => {
+            const input = document.getElementById('inputTugas').value;
+            const list = document.getElementById('listTugas');
+
+            if (input.trim() === '') return;
+
+            const listItem = document.createElement('li');
+            listItem.className = 'group relative flex items-center gap-3 px-5 py-3 hover:bg-neutral-900/50 transition-colors duration-200 cursor-pointer border-l-2 border-transparent hover:border-neutral-700';
+
+            const label = document.createElement('label');
+            label.className = 'flex items-center gap-3 w-full cursor-pointer';
+
+            const checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.className = 'task-checkbox hidden';
+
+            const checkboxDiv = document.createElement('div');
+            checkboxDiv.className = 'w-4 h-4 border border-neutral-700 rounded-[5px] flex items-center justify-center transition-all bg-transparent';
+
+            const checkIcon = document.createElement('iconify-icon');
+            checkIcon.setAttribute('icon', 'lucide:check');
+            checkIcon.setAttribute('width', '10');
+            checkIcon.setAttribute('stroke-width', '3');
+            checkIcon.className = 'block';
+
+            const span = document.createElement('span');
+            span.className = 'text-sm text-neutral-300 font-normal transition-colors';
+            span.textContent = input;
+
+            const deleteButton = document.createElement('button');
+            deleteButton.className = 'text-neutral-600 hover:text-red-400 opacity-0 group-hover:opacity-100 transition-all transform scale-90 group-hover:scale-100';
+            deleteButton.innerHTML = '<iconify-icon icon="lucide:trash-2" width="16" stroke-width="1.5"></iconify-icon>';
+
+            deleteButton.onclick = () => {
+                list.removeChild(listItem);
+            };
+
+            checkboxDiv.appendChild(checkIcon);
+            label.appendChild(checkbox);
+            label.appendChild(checkboxDiv);
+            label.appendChild(span);
+            listItem.appendChild(label);
+            listItem.appendChild(deleteButton);
+            list.appendChild(listItem);
+
+            document.getElementById('inputTugas').value = '';
+
+
+        }
+    </script>
+</body>
+</html>
