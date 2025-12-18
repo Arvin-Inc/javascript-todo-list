@@ -14,6 +14,8 @@
             transform: translate(-50%, -50%);
             border: 2px solid black;
             padding: 15px;
+            align-items: center;
+            text-align: center;
         }
 
         #generateButton {
@@ -24,9 +26,9 @@
     </style>
 </head>
 
-    <body>
-        <div class="contents" align="center" hidden>
-            <button id="incrementButton">Tekan Aku : </button>
+    <body onload="welcome()">
+        <div class="contents" hidden>
+            <button id="incrementButton" onclick="incrementButton()">Tekan Aku : </button>
             <h3>Kamu sudah menekan tombol di atas sebanyak <span id="count">0</span></h3>
         </div>
 
@@ -54,8 +56,11 @@
 
             }
             // elemen.{nama_event} = namaFunction();
-            document.body.onload = welcome;
-            document.getElementById("incrementButton").onclick = incrementButton;
+            // document.body.onload = welcome;
+            // document.getElementById("incrementButton").onclick = incrementButton;
+
+            window.addEventListener('laod', welcome);
+            document.getElementById("incrementButton").addEventListener('click', incrementButton);
         </script>
     </body>
 
